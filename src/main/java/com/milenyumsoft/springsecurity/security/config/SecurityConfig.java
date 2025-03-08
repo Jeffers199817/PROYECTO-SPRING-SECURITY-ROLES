@@ -2,9 +2,11 @@ package com.milenyumsoft.springsecurity.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -23,7 +25,18 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity)throws Exception{
 
-        return null;
+        return httpSecurity
+                .csrf(csrf->csrf.disable())
+                .httpBasic(Customizer.withDefaults())
+                .sessionManagement(session->session.sessionCreationPolicy.STATELESS())
+                .authorizeHttpRequests(http ->{
+                    //Endpoints
+
+                    http.requestMatchers(HttpMethod.GET, "/holanoseg").permitAll();
+                    http.requestMatchers(HttpMethod.GET,"/holaseg").hasAuthority("READ");
+                    http.anyRequest().denyAll();
+                })
+        .build();
     }
 
 
@@ -41,8 +54,8 @@ public class SecurityConfig {
     public AuthenticationProvider authenticationProvider(){
 
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(null);
-        provider.setUserDetailsService(null);
+        provider.setPasswordEncoder(passwordEncoder());
+        provider.setUserDetailsService(userDetailsService());
         return provider;
     }
 
