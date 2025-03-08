@@ -7,10 +7,15 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 public class SecurityConfig {
@@ -52,8 +57,35 @@ public class SecurityConfig {
     //Configurar nuestro userdetailsservice
 
     @Bean
-    public UserDetailsService userDetailsService()throws Exception{
+    public UserDetailsService userDetailsService(){
 
+        List userDetailsList = new ArrayList<>();
+
+        userDetailsList.add(User.withUsername("milenyum")
+                .password("12345")
+                .roles("ADMIN")
+                .authorities("CREATE","READ","UPDATE","DELETE")
+                .build());
+
+
+
+
+        userDetailsList.add(User.withUsername("seguidor")
+                .password("12345")
+                .roles("USER")
+                .authorities("READ")
+                .build());
+
+
+
+        userDetailsList.add(User.withUsername("actualizador")
+                .password("12345")
+                .roles("USER")
+                .authorities("UPDATE")
+                .build());
+
+
+        return new InMemoryUserDetailsManager(userDetailsList);
     }
 
 }
