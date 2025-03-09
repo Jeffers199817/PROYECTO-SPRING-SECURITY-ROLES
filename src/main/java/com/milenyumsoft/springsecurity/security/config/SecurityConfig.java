@@ -8,7 +8,9 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,12 +23,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
+@EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
     //Permite agregar los permisos.
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity)throws Exception{
 
-        return httpSecurity
+        /*return httpSecurity
                 .csrf(csrf->csrf.disable())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -36,7 +40,11 @@ public class SecurityConfig {
                     http.requestMatchers(HttpMethod.GET, "/holanoseg").permitAll();
                     http.requestMatchers(HttpMethod.GET,"/holaseg").hasAuthority("READ");
                     http.anyRequest().denyAll();
-                })
+                })*/
+        return httpSecurity
+                .csrf(csrf->csrf.disable())
+                .httpBasic(Customizer.withDefaults())
+                .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .build();
     }
 
