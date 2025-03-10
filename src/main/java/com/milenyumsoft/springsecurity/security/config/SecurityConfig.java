@@ -26,7 +26,7 @@ import java.util.List;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-    //Permite agregar los permisos.
+    //1.-Permite agregar los permisos.
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity)throws Exception{
 
@@ -49,7 +49,7 @@ public class SecurityConfig {
     }
 
 
-    //Permite la gestion de la autenticación administración de authenticación
+    //2.Permite la gestion de la autenticación administración de authenticación
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)throws Exception{
 
@@ -57,7 +57,7 @@ public class SecurityConfig {
     }
 
 
-    //proveedor de autenticación
+    //3.-proveedor de autenticación
 
     @Bean
     public AuthenticationProvider authenticationProvider(){
@@ -69,14 +69,14 @@ public class SecurityConfig {
     }
 
 
-    //Password
+    //4.-Password
     @Bean
     public PasswordEncoder passwordEncoder(){
 
         return NoOpPasswordEncoder.getInstance();
     }
 
-    //Configurar nuestro userdetailsservice
+    //5Configurar nuestro userdetailsservice
 
     @Bean
     public UserDetailsService userDetailsService(){
