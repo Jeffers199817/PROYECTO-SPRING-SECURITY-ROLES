@@ -3,6 +3,8 @@ package com.milenyumsoft.springsecurity.service;
 import com.milenyumsoft.springsecurity.modelo.UserSec;
 import com.milenyumsoft.springsecurity.repository.IUserSecRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,5 +39,11 @@ public class UserService implements IUserService{
     @Override
     public UserSec update(UserSec userSec) {
         return userRepo.save(userSec);
+    }
+
+    @Override
+    public String encriptPassword(String password) {
+
+        return new BCryptPasswordEncoder().encode(password);
     }
 }
