@@ -35,16 +35,16 @@ public class UserDetailsServiceImp implements UserDetailsService {
 
         //con GrantedAuthority spring security maneja permisos
 
-        List<GrantedAuthority> authorityList = new ArrayList<>();
+        List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
 
         //Programación funcional a full
-        //Tomamos roles y los convertimos en simple grantedauthority para poder agregasrlos a  la authoritylist
+        //Traer roles y convertirlos en siplegrantedauthority
 
         userSec.getRolesList()
                 .forEach(role->authorityList.add(new SimpleGrantedAuthority("ROLE_".concat(role.getRole()))));
 
 
-        //ahora tenemos que agregar los permisoss
+        //traer permisos y convertirlos en simpleGrntesautority
 
         userSec.getRolesList().stream()
                 .flatMap(role-> role.getPermissionsList().stream())
