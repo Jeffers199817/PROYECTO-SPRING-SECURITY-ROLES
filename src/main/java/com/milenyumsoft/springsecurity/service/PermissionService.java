@@ -16,29 +16,31 @@ public class PermissionService implements IPermissionService{
 
 
     @Override
-    public List findAll() {
+    public List<Permission> findAll() {
 
 
-        return List.of();
+        return permissionRepo.findAll();
     }
 
     @Override
-    public Optional findById(long id) {
-        return Optional.empty();
+    public Optional<Permission> findById(long id) {
+        return permissionRepo.findById(id);
     }
 
     @Override
     public Permission save(Permission permission) {
-        return null;
+
+        return permissionRepo.save(permission);
     }
 
     @Override
     public void deleteById(Long id) {
-
+            permissionRepo.deleteById(id);
     }
 
     @Override
     public Permission update(Permission permission) {
-        return null;
+
+        return permissionRepo.save(permission);
     }
 }

@@ -2,7 +2,6 @@ package com.milenyumsoft.springsecurity.controller;
 
 import com.milenyumsoft.springsecurity.modelo.Permission;
 import com.milenyumsoft.springsecurity.service.IPermissionService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +26,7 @@ public class PermissionController {
     @GetMapping("/{id}")
     public ResponseEntity<Permission> getPermissionById(@PathVariable Long id){
         Optional<Permission> permission = permissionService.findById(id);
-        return (ResponseEntity) permission.map(ResponseEntity::ok).orElseGet(() ->ResponseEntity.notFound().build());
+        return permission.map(ResponseEntity::ok).orElseGet(() ->ResponseEntity.notFound().build());
     }
 
     @PostMapping

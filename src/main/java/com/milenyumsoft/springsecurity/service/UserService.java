@@ -1,6 +1,7 @@
 package com.milenyumsoft.springsecurity.service;
 
 import com.milenyumsoft.springsecurity.modelo.UserSec;
+import com.milenyumsoft.springsecurity.repository.IUserSecRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,8 @@ import java.util.Optional;
 public class UserService implements IUserService{
 
     @Autowired
-    private IUserService userRepo;
+    private IUserSecRepository userRepo;
+
     @Override
     public List<UserSec> findAll() {
         return userRepo.findAll();

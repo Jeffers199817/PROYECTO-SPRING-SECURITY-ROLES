@@ -24,7 +24,7 @@ public class UserSec {
     private boolean enabled;
     private boolean accountNotExpired;
     private boolean accountNotLocked;
-    private boolean credentialNotEcpired;
+    private boolean credentialNotExpired;
 
     //Usamos Set porque no permite repetidos
     //List permite repetidos

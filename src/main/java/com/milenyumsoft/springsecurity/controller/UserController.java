@@ -4,7 +4,6 @@ import com.milenyumsoft.springsecurity.modelo.Role;
 import com.milenyumsoft.springsecurity.modelo.UserSec;
 import com.milenyumsoft.springsecurity.service.IRoleService;
 import com.milenyumsoft.springsecurity.service.IUserService;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +34,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserSec> getUserById(@PathVariable Long id){
         Optional<UserSec> user = userService.findById(id);
-        return (ResponseEntity) user.map(ResponseEntity::ok).orElseGet(()->ResponseEntity.notFound().build());
+        return user.map(ResponseEntity::ok).orElseGet(()->ResponseEntity.notFound().build());
     }
 
     @PostMapping
