@@ -11,7 +11,7 @@ public class HelloWorldController {
 
 
     @GetMapping("holaseg")
-    @PreAuthorize(" hasAnyRole('ADMIN') ")
+    @PreAuthorize(" hasRole('ADMIN') ")
     public String secHelloWorld(){
         return "Hola Mundo Mylenyum-Soft con seguridad";
     }

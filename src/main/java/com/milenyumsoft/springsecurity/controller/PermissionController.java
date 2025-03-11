@@ -18,7 +18,7 @@ public class PermissionController {
     private IPermissionService permissionService;
 
 
-    @GetMapping
+    @GetMapping("/todo")
     @PreAuthorize("hasAuthority('READ')")
     public ResponseEntity<List<Permission>> getAllPermissions(){
         List<Permission> permissions = permissionService.findAll();
@@ -33,6 +33,7 @@ public class PermissionController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('CREATE') and hasAnyRole('ADMIN') ")
     public ResponseEntity<Permission> createPermission(@RequestBody Permission permission){
         Permission newPermission = permissionService.save(permission);
         return ResponseEntity.ok(newPermission);

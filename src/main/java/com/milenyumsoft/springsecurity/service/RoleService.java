@@ -1,18 +1,23 @@
 package com.milenyumsoft.springsecurity.service;
 
+import com.milenyumsoft.springsecurity.modelo.Permission;
 import com.milenyumsoft.springsecurity.modelo.Role;
+import com.milenyumsoft.springsecurity.repository.IPermissionRepository;
 import com.milenyumsoft.springsecurity.repository.IRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class RoleService implements IRoleService{
 
     @Autowired
     private IRoleRepository roleRepository;
+    @Autowired
+    private IPermissionRepository permissionRepository;
     @Override
     public List<Role> findAll() {
         return roleRepository.findAll() ;
@@ -35,13 +40,6 @@ public class RoleService implements IRoleService{
 
     @Override
     public Role update(Role role) {
-
-        Role rol = roleRepository.getById(role.getId());
-
-        rol.setRole(role.getRole());
-        rol.setPermissionsList(role.getPermissionsList());
-
-
-        return  roleRepository.save(rol);
+        return roleRepository.save(role);
     }
 }
