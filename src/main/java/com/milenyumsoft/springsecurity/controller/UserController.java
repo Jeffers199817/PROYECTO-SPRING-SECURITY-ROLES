@@ -7,6 +7,7 @@ import com.milenyumsoft.springsecurity.service.IUserService;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
@@ -16,6 +17,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/users")
+@PreAuthorize("denyAll()")
 public class UserController {
 
     @Autowired
@@ -24,6 +26,7 @@ public class UserController {
     private IRoleService roleService;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('READ')")
     public ResponseEntity<List<UserSec>> getAllUsers(){
 
         List<UserSec> users = userService.findAll();
@@ -33,6 +36,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('READ')")
     public ResponseEntity<UserSec> getUserById(@PathVariable Long id){
         Optional<UserSec> user = userService.findById(id);
         return user.map(ResponseEntity::ok).orElseGet(()->ResponseEntity.notFound().build());

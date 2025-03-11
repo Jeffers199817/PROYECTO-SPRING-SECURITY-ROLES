@@ -35,6 +35,13 @@ public class RoleService implements IRoleService{
 
     @Override
     public Role update(Role role) {
-        return  roleRepository.save(role);
+
+        Role rol = roleRepository.getById(role.getId());
+
+        rol.setRole(role.getRole());
+        rol.setPermissionsList(role.getPermissionsList());
+
+
+        return  roleRepository.save(rol);
     }
 }
