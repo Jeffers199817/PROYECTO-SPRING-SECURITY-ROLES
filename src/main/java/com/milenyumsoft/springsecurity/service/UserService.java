@@ -1,6 +1,7 @@
 package com.milenyumsoft.springsecurity.service;
 
 import com.milenyumsoft.springsecurity.modelo.UserSec;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,29 +10,30 @@ import java.util.Optional;
 @Service
 public class UserService implements IUserService{
 
-
+    @Autowired
+    private IUserService userRepo;
     @Override
-    public List findAll() {
-        return List.of();
+    public List<UserSec> findAll() {
+        return userRepo.findAll();
     }
 
     @Override
-    public Optional findById(Long id) {
-        return Optional.empty();
+    public Optional<UserSec> findById(Long id) {
+        return userRepo.findById(id);
     }
 
     @Override
     public UserSec save(UserSec userSec) {
-        return null;
+        return userRepo.save(userSec);
     }
 
     @Override
     public void deleteById(Long id) {
-
+        userRepo.deleteById(id);
     }
 
     @Override
     public UserSec update(UserSec userSec) {
-        return null;
+        return userRepo.save(userSec);
     }
 }

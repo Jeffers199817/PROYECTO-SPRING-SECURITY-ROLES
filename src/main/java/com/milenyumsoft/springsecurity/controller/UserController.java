@@ -24,22 +24,22 @@ public class UserController {
     private IRoleService roleService;
 
     @GetMapping
-    public ResponseEntity<List> getAllUsers(){
+    public ResponseEntity<List<UserSec>> getAllUsers(){
 
-        List users = userService.findAll();
+        List<UserSec> users = userService.findAll();
 
         return ResponseEntity.ok(users);
 
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getUserById(@PathVariable Long id){
-        Optional user = userService.findById(id);
+    public ResponseEntity<UserSec> getUserById(@PathVariable Long id){
+        Optional<UserSec> user = userService.findById(id);
         return (ResponseEntity) user.map(ResponseEntity::ok).orElseGet(()->ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity createUser(@RequestBody UserSec userSec) {
+    public ResponseEntity<UserSec> createUser(@RequestBody UserSec userSec) {
 
         Set<Role> roleList = new HashSet<>();
         Role readRole;

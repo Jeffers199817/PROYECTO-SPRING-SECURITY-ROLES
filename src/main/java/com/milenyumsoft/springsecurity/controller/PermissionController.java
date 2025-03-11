@@ -19,19 +19,19 @@ public class PermissionController {
 
 
     @GetMapping
-    public ResponseEntity<List> getAllPermissions(){
-        List permissions = permissionService.findAll();
+    public ResponseEntity<List<Permission>> getAllPermissions(){
+        List<Permission> permissions = permissionService.findAll();
         return ResponseEntity.ok(permissions);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getPermissionById(@PathVariable Long id){
-        Optional permission = permissionService.findById(id);
+    public ResponseEntity<Permission> getPermissionById(@PathVariable Long id){
+        Optional<Permission> permission = permissionService.findById(id);
         return (ResponseEntity) permission.map(ResponseEntity::ok).orElseGet(() ->ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity createPermission(@RequestBody Permission permission){
+    public ResponseEntity<Permission> createPermission(@RequestBody Permission permission){
         Permission newPermission = permissionService.save(permission);
         return ResponseEntity.ok(newPermission);
     }
