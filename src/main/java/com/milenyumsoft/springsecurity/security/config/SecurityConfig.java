@@ -60,11 +60,20 @@ public class SecurityConfig {
     //3.-proveedor de autenticación
 
     @Bean
-    public AuthenticationProvider authenticationProvider(){
+    public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService){
 
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(passwordEncoder());
+
+        //sacamos el anteriro , el lógico y agreamos el nuvo
+        provider.setUserDetailsService(userDetailsService);
+
+
+       /* DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setPasswordEncoder(passwordEncoder());
         provider.setUserDetailsService(userDetailsService());
+
+        */
         return provider;
     }
 
@@ -78,7 +87,7 @@ public class SecurityConfig {
 
     //5Configurar nuestro userdetailsservice
 
-    @Bean
+    /*@Bean
     public UserDetailsService userDetailsService(){
 
         List userDetailsList = new ArrayList<>();
@@ -108,6 +117,6 @@ public class SecurityConfig {
 
 
         return new InMemoryUserDetailsManager(userDetailsList);
-    }
+    } */
 
 }
