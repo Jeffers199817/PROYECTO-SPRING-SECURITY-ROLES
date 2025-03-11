@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public interface IRoleService {
 
-    public List findAll();
-    public Optional findById(Long id);
+    public List<Role> findAll();
+    public Optional<Role> findById(Long id);
     public Role save(Role role);
     public void deleteById(Long id);
     public Role update(Role role);
