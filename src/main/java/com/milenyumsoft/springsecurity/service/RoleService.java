@@ -40,6 +40,7 @@ public class RoleService implements IRoleService{
 
     @Override
     public Role update(Role role) {
+        System.out.println("Bine");
         return roleRepository.save(role);
     }
 }
