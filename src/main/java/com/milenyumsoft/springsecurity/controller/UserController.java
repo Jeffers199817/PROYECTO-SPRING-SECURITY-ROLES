@@ -25,9 +25,11 @@ public class UserController {
     @Autowired
     private IRoleService roleService;
 
+
     @GetMapping
     @PreAuthorize("hasAuthority('READ')")
     public ResponseEntity<List<UserSec>> getAllUsers(){
+
 
         List<UserSec> users = userService.findAll();
 
