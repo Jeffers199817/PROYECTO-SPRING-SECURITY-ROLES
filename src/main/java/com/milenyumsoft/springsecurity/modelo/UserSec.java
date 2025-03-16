@@ -23,6 +23,7 @@ public class UserSec {
     private String password;
     private boolean enabled;
     private boolean accountNotExpired;
+
     private boolean accountNotLocked;
     private boolean credentialNotExpired;
 
