@@ -27,6 +27,7 @@ public class UserService implements IUserService{
     }
 
     @Override
+
     public UserSec save(UserSec userSec) {
         return userRepo.save(userSec);
     }

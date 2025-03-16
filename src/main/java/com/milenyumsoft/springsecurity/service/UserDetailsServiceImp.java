@@ -30,6 +30,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
         //traemos el usuario de la bd
 
         UserSec userSec = userRepo.findUserEntityByUsername(username)
+
                 .orElseThrow(() -> new UsernameNotFoundException(" El usuario " + username + " No fue encontrado"));
 
 
@@ -39,6 +40,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
 
         //Programación funcional a full
         //Traer roles y convertirlos en siplegrantedauthority
+
 
         userSec.getRolesList()
                 .forEach(role->authorityList.add(new SimpleGrantedAuthority("ROLE_".concat(role.getRole()))));

@@ -10,6 +10,7 @@ public interface IPermissionService {
     public List<Permission> findAll();
     public Optional<Permission> findById(long id);
     public Permission save(Permission permission);
+
     public void deleteById(Long id);
     public Permission update(Permission permission);
 }

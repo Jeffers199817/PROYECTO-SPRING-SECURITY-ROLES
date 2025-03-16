@@ -22,8 +22,10 @@ public class PermissionService implements IPermissionService{
         return permissionRepo.findAll();
     }
 
+
     @Override
     public Optional<Permission> findById(long id) {
+
         return permissionRepo.findById(id);
     }
 
