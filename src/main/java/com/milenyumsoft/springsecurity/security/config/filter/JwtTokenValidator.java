@@ -1,4 +1,4 @@
-package com.milenyumsoft.springsecurity.utils.filter;
+package com.milenyumsoft.springsecurity.security.config.filter;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 
